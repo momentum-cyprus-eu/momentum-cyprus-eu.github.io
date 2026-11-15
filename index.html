@@ -338,13 +338,67 @@
   const lead = document.querySelector('.lead path'), first = document.querySelector('.pfacts li'), list = document.querySelector('.pfacts');
   const steps = [...document.querySelectorAll('#locations [data-at]')];
   const canvas = document.querySelector('.island'), pins = document.querySelector('.pins'), art = document.querySelector('.paphos-art');
-  /* the drawing of Paphos (a pen illustration) appears in three movements as you scroll: a faint pencil sketch
-     comes into focus, the ink washes across it from the hills to the sea on a soft wide edge, and last the
-     colour of the sea blooms in */
-  {
-    const img = matchMedia('(max-width: 760px)').matches ? 'assets/paphos-drawn-m.webp' : 'assets/paphos-drawn.webp';
-    art.innerHTML = `<img class="ghost" src="${img}" alt="" decoding="async"><img class="inked" src="${img}" alt="A drawing of Paphos harbour" decoding="async">`;
-  }
+  /* the drawing of Paphos (a pen illustration) appears as ink seeping into paper: a faint pencil sketch comes into
+     focus, then the ink blooms out from a few drops with soft, fibrous, irregular edges and a darker wet rim where
+     it is still spreading, and last the colour of the sea comes in */
+  const inkTo = (() => {
+    const src = matchMedia('(max-width: 760px)').matches ? 'assets/paphos-drawn-m.webp' : 'assets/paphos-drawn.webp';
+    art.innerHTML = `<img class="ghost" src="${src}" alt="A drawing of Paphos harbour" decoding="async"><canvas class="inked"></canvas>`;
+    const img = art.firstElementChild, cv = art.lastElementChild, ctx = cv.getContext('2d');
+    /* when the ink reaches each point of the paper (0 to 1): spreading out from the drops, roughened by paper noise */
+    const FW = 300, FH = Math.round(FW * 1152 / 2688), field = new Float32Array(FW * FH);
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const G = 64, grid = Array.from({ length: G * G }, rnd);
+    const vn = (x, y) => { const i = Math.floor(x), j = Math.floor(y), fx = x - i, fy = y - j, u = fx * fx * (3 - 2 * fx), v = fy * fy * (3 - 2 * fy);
+      const g = (a, b) => grid[((b % G + G) % G) * G + ((a % G + G) % G)];
+      return (g(i, j) * (1 - u) + g(i + 1, j) * u) * (1 - v) + (g(i, j + 1) * (1 - u) + g(i + 1, j + 1) * u) * v; };
+    const fbm = (x, y) => { let s = 0, a = 0.5; for (let o = 0; o < 5; o++) { s += a * vn(x, y); x *= 2.03; y *= 2.03; a *= 0.5; } return s; };
+    const drops = [[0.2, 0.42, 0], [0.44, 0.3, 0.1], [0.66, 0.5, 0.2], [0.32, 0.72, 0.28], [0.86, 0.62, 0.36], [0.58, 0.84, 0.46], [0.94, 0.3, 0.5]];
+    let lo = 9, hi = -9;
+    for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
+      const nx = x / FW, ny = y / FH;
+      let t = 9; for (const [dx, dy, d0] of drops) t = Math.min(t, d0 + Math.hypot((nx - dx) * 2.33, ny - dy) * 0.42);
+      t += (fbm(nx * 6, ny * 2.6) - 0.5) * 0.34 + (vn(nx * 90, ny * 39) - 0.5) * 0.05;
+      field[y * FW + x] = t; lo = Math.min(lo, t); hi = Math.max(hi, t);
+    }
+    for (let i = 0; i < field.length; i++) field[i] = (field[i] - lo) / (hi - lo);
+    const small = document.createElement('canvas'); small.width = FW; small.height = FH;
+    const sctx = small.getContext('2d'), mask = sctx.createImageData(FW, FH), rimSmall = document.createElement('canvas');
+    rimSmall.width = FW; rimSmall.height = FH;
+    const rctx = rimSmall.getContext('2d'), rim = rctx.createImageData(FW, FH), wet = document.createElement('canvas'), wctx = wet.getContext('2d');
+    let want = 0, drawn = -1, ready = false;
+    const paint = () => {
+      if (!ready || Math.abs(want - drawn) < 0.0015) return;
+      drawn = want;
+      const W = cv.width, H = cv.height;
+      ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, W, H);
+      if (want <= 0) return;
+      if (want >= 1) { ctx.drawImage(img, 0, 0, W, H); return; }
+      const front = want * 1.12, edge = 0.045;
+      for (let i = 0; i < field.length; i++) {
+        const d = front - field[i], a = Math.min(1, Math.max(0, d / edge + 0.5)), k = i * 4;
+        mask.data[k + 3] = (a * a * (3 - 2 * a)) * 255;
+        const r = Math.max(0, 1 - Math.abs(d - edge * 0.9) / (edge * 1.6));
+        rim.data[k + 3] = r * r * 255;
+      }
+      sctx.putImageData(mask, 0, 0); rctx.putImageData(rim, 0, 0);
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, 0, 0, W, H);
+      ctx.globalCompositeOperation = 'destination-in'; ctx.drawImage(small, 0, 0, W, H);
+      /* the wet rim: the same drawing again, only along the spreading edge, multiplied in so the ink looks deeper there */
+      wctx.globalCompositeOperation = 'source-over'; wctx.clearRect(0, 0, W, H); wctx.drawImage(img, 0, 0, W, H);
+      wctx.globalCompositeOperation = 'destination-in'; wctx.drawImage(rimSmall, 0, 0, W, H);
+      ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(wet, 0, 0, W, H); ctx.globalAlpha = 1;
+    };
+    const setup = () => {
+      const W = Math.min(img.naturalWidth, Math.round(art.clientWidth * Math.min(devicePixelRatio || 1, 2)) || img.naturalWidth);
+      cv.width = wet.width = W; cv.height = wet.height = Math.round(W * img.naturalHeight / img.naturalWidth);
+      ready = true; drawn = -1; paint();
+    };
+    img.complete && img.naturalWidth ? setup() : img.addEventListener('load', setup, { once: true });
+    if (document.documentElement.classList.contains('no-webgl')) want = 1;
+    return v => { want = v; paint(); };
+  })();
   const band = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
   const onFrame = (inLoc, p, x, y) => {
     if (!inLoc) { canvas.style.opacity = pins.style.opacity = ''; return; }
@@ -354,7 +408,7 @@
     art.style.opacity = fade.toFixed(3);   // its paper-filled houses would otherwise blank out patches of the map
     const ease = t => t * t * (3 - 2 * t);
     art.style.setProperty('--sketch', ease(band(draw, 0, 0.3)).toFixed(3));
-    art.style.setProperty('--ink', ease(band(draw, 0.18, 0.86)).toFixed(4));
+    inkTo(band(draw, 0.14, 0.88));
     art.style.setProperty('--colour', ease(band(draw, 0.7, 1)).toFixed(3));
     art.classList.toggle('alive', draw >= 1);
     const box = list.getBoundingClientRect(), f = first.getBoundingClientRect(), pin = lead.ownerSVGElement.getBoundingClientRect();

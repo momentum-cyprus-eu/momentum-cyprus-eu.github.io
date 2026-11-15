@@ -170,17 +170,15 @@ h3{font:500 clamp(22px,1.75vw,26px)/1.15 var(--serif);letter-spacing:.002em}
 .no-webgl .paphos-art{opacity:1}
 /* the picture's edges fade into the paper, so it reads as drawn on the page, not placed on it */
 .paphos-art{-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(transparent,#000 9%,#000 88%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(transparent,#000 9%,#000 88%,transparent);mask-composite:intersect}
-/* pencil, then ink, then colour (the three variables come from the scroll) */
-.paphos-art{--sketch:0;--ink:0;--colour:0;aspect-ratio:2688/1152}
-.paphos-art img{position:absolute;inset:0;width:100%;height:100%;display:block;mix-blend-mode:multiply;transform-origin:70% 60%}
+/* pencil, then ink seeping into the paper (drawn on the canvas), then colour; the variables come from the scroll */
+.paphos-art{--sketch:0;--colour:0;aspect-ratio:2688/1152}
+.paphos-art>*{position:absolute;inset:0;width:100%;height:100%;display:block;mix-blend-mode:multiply;transform-origin:70% 60%}
 .paphos-art .ghost{opacity:calc(var(--sketch) * .22);filter:grayscale(1) blur(calc((1 - var(--sketch)) * 4px));scale:calc(1.02 - var(--sketch) * .02)}
-.paphos-art .inked{filter:grayscale(calc(1 - var(--colour)));
-  -webkit-mask-image:linear-gradient(105deg,#000 calc(var(--ink) * 150% - 50%),transparent calc(var(--ink) * 150%));
-  mask-image:linear-gradient(105deg,#000 calc(var(--ink) * 150% - 50%),transparent calc(var(--ink) * 150%))}
+.paphos-art .inked{filter:grayscale(calc(1 - var(--colour)))}
 /* once complete, it breathes: a very slow drift */
-.paphos-art.alive img{animation:breathe 18s ease-in-out infinite alternate}
+.paphos-art.alive>*{animation:breathe 18s ease-in-out infinite alternate}
 @keyframes breathe{to{transform:scale(1.025) translateX(-6px)}}
-.no-webgl .paphos-art{--sketch:1;--ink:1;--colour:1}
+.no-webgl .paphos-art{--sketch:1;--colour:1}
 .no-webgl .island,.no-webgl .pins{display:none}
 .no-webgl .loc{height:auto}.no-webgl .loc-pin{position:relative;height:auto}
 
