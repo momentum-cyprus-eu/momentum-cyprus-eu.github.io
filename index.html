@@ -205,7 +205,6 @@
     <div class="wrap loc-in">
       <p class="label">Locations</p>
       <h2 class="split" id="loc-h">Paphos.</h2>
-      <p class="coord">34.77° N · 32.42° E</p>
       <ul class="pfacts">
         <li data-at="0.3">Relaxed, green and by the sea.</li>
         <li data-at="0.4">The island’s largest British community.</li>
@@ -339,30 +338,12 @@
   const lead = document.querySelector('.lead path'), first = document.querySelector('.pfacts li'), list = document.querySelector('.pfacts');
   const steps = [...document.querySelectorAll('#locations [data-at]')];
   const canvas = document.querySelector('.island'), pins = document.querySelector('.pins'), art = document.querySelector('.paphos-art');
-  /* the drawing of Paphos is a pen illustration (an image): a faint pencil copy shows first, then broad pen
-     strokes inside a mask ink it in band by band, hills first and the sea last */
-  let strokes = [];
+  /* the drawing of Paphos (a pen illustration) appears in three movements as you scroll: a faint pencil sketch
+     comes into focus, the ink washes across it from the hills to the sea on a soft wide edge, and last the
+     colour of the sea blooms in */
   {
-    const W = 2688, H = 1152, img = matchMedia('(max-width: 760px)').matches ? 'assets/paphos-drawn-m.webp' : 'assets/paphos-drawn.webp';
-    const BANDS = 7, bh = H / BANDS;
-    let rs = 11; const rnd = () => (rs = (rs * 16807) % 2147483647) / 2147483647;
-    let brush = '';
-    for (let i = 0; i < BANDS; i++) {
-      const y0 = i * bh, y1 = y0 + bh;
-      let d = `M${-120} ${(y0 + bh * 0.5).toFixed(0)}`;
-      for (let x = -120, up = true; x < W + 160; x += 150 + rnd() * 60, up = !up)
-        d += `L${x.toFixed(0)} ${((up ? y0 - bh * 0.25 : y1 + bh * 0.25) + (rnd() - 0.5) * 40).toFixed(0)}`;
-      brush += `<path d="${d}" pathLength="1"/>`;
-    }
-    art.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="A drawing of Paphos harbour">
-      <defs><mask id="ink" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}">
-        <g fill="none" stroke="#fff" stroke-width="${(bh * 1.25).toFixed(0)}" stroke-linecap="round" stroke-linejoin="round">${brush}</g>
-      </mask></defs>
-      <image class="ghost" href="${img}" width="${W}" height="${H}"/>
-      <image class="inked" href="${img}" width="${W}" height="${H}" mask="url(#ink)"/>
-    </svg>`;
-    const els = [...art.querySelectorAll('mask path')], SPAN = 0.26;
-    strokes = els.map((el, k) => { const a = k / els.length * (1 - SPAN); return { el, a, b: a + SPAN, v: -1 }; });
+    const img = matchMedia('(max-width: 760px)').matches ? 'assets/paphos-drawn-m.webp' : 'assets/paphos-drawn.webp';
+    art.innerHTML = `<img class="ghost" src="${img}" alt="" decoding="async"><img class="inked" src="${img}" alt="A drawing of Paphos harbour" decoding="async">`;
   }
   const band = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
   const onFrame = (inLoc, p, x, y) => {
@@ -371,12 +352,11 @@
     const fade = band(p, 0.5, 0.62), draw = band(p, 0.56, 0.92);
     canvas.style.opacity = pins.style.opacity = lead.style.opacity = (1 - fade).toFixed(3);
     art.style.opacity = fade.toFixed(3);   // its paper-filled houses would otherwise blank out patches of the map
-    for (const s of strokes) {
-      const v = band(draw, s.a, s.b);
-      if (v !== s.v) { s.v = v; s.el.style.strokeDashoffset = (1 - v).toFixed(4); }
-    }
-    /* once it is fully drawn, the boats, gulls, sea, palms and sun begin to move */
-    const svg = art.firstElementChild; if (svg) svg.classList.toggle('alive', draw >= 1);
+    const ease = t => t * t * (3 - 2 * t);
+    art.style.setProperty('--sketch', ease(band(draw, 0, 0.3)).toFixed(3));
+    art.style.setProperty('--ink', ease(band(draw, 0.18, 0.86)).toFixed(4));
+    art.style.setProperty('--colour', ease(band(draw, 0.7, 1)).toFixed(3));
+    art.classList.toggle('alive', draw >= 1);
     const box = list.getBoundingClientRect(), f = first.getBoundingClientRect(), pin = lead.ownerSVGElement.getBoundingClientRect();
     const x0 = box.right + 24 - pin.left, y0 = f.top + f.height / 2 - pin.top, x1 = x - pin.left, y1 = y - pin.top;
     lead.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)}H${Math.max(x0, x1 - 70).toFixed(1)}L${x1.toFixed(1)} ${y1.toFixed(1)}`);
