@@ -1,0 +1,13 @@
+{
+  "width": 1055,
+  "height": 690,
+  "offset": 12000,
+  "min": -2851,
+  "max": 1918,
+  "west": 31.95098876953125,
+  "east": 34.8486328125,
+  "north": 35.880148964883595,
+  "south": 34.32982832836203,
+  "metresPerPixel": 250,
+  "source": "AWS Terrain Tiles (Terrarium), zoom 9"
+}
