@@ -5,255 +5,323 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Momentum Capital Group | Cyprus Property Specialists</title>
 <meta name="description" content="Momentum Capital Group guides buyers from the UK and across Europe through every step of buying property in Cyprus.">
-<meta name="robots" content="noindex, nofollow"><!-- LAUNCH: remove once the real numbers, stories and contact details are in -->
-<meta name="theme-color" content="#EDE7DC">
+<meta name="robots" content="noindex, nofollow"><!-- LAUNCH: remove once the real stories and contact details are in -->
+<meta name="theme-color" content="#0D2131">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.27/dist/lenis.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.4.0/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/site.css?v=mwhtylcn">
+<link rel="stylesheet" href="assets/style.css?v=mwj94k9e">
 <script>
-  /* hide what is about to be revealed, but never for long if the scripts don't arrive */
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.classList.add('anim');
-    setTimeout(() => document.documentElement.classList.remove('anim'), 3500);
-  }
+  /* reveal states, and the opening (once per visit, never with reduced motion, never stuck if the scripts fail) */
+  (() => {
+    const r = document.documentElement, still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let seen = false; try { seen = sessionStorage.getItem('mm-intro') === '1' && !/intro=hold/.test(location.search); } catch (e) {}
+    if (still || seen) r.classList.add('no-intro');
+    if (!still) r.classList.add('anim');
+    setTimeout(() => { if (!window.__mm) { r.classList.add('no-intro'); r.classList.remove('anim'); } }, 4000);
+  })();
 </script>
 </head>
 <body>
+<!-- the opening: the logo draws itself, a line fills, then an arch opens onto Paphos and lands in the hero's frame -->
+<div class="intro" aria-hidden="true">
+  <div class="intro-mid">
+    <div class="intro-logo"><img src="assets/logo-paper.svg" alt="" width="260" height="42"></div>
+    <span class="intro-bar"><i></i></span>
+  </div>
+  <div class="intro-arch"><img src="assets/paphos-dusk.webp" alt=""></div>
+  <button class="intro-skip" type="button" tabindex="-1">Skip</button>
+</div>
 <a class="skip" href="#main">Skip to content</a>
 
-<canvas class="island" aria-hidden="true"></canvas>
-<div class="pins" aria-hidden="true"></div>
-<div class="eu-ring" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
-
-<!-- 1. Header -->
 <header class="head" id="head">
-  <div class="head-in">
-    <a class="logo" href="#top" aria-label="Momentum Capital Group, back to top"><img src="assets/logo-ink.svg" alt="Momentum Capital Group" width="172" height="31"></a>
+  <div class="wrap head-in">
+    <a class="logo" href="#top" aria-label="Momentum Capital Group, back to top">
+      <img class="on-dark" src="assets/logo-paper.svg" alt="Momentum Capital Group" width="172" height="31">
+      <img class="on-light" src="assets/logo-ink.svg" alt="" width="172" height="31">
+    </a>
     <nav class="menu" aria-label="Main">
-      <a href="#why-cyprus">Why Cyprus</a>
-      <a href="#service">Our Service</a>
-      <a href="#story">Our Story</a>
-      <a href="#contact">Contact</a>
+      <a href="#why-cyprus">Why Cyprus</a><a href="#service">Our Service</a><a href="#story">Our Story</a><a href="#contact">Contact</a>
     </nav>
-    <a class="btn btn-ink head-cta" href="#contact">Book a free consultation</a>
-    <span class="read" aria-hidden="true"></span>
+    <a class="btn btn-gold head-cta" href="#contact">Free consultation</a>
+    <span class="prog" aria-hidden="true"></span>
     <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sheet"><span></span><span></span></button>
   </div>
 </header>
 <div class="sheet" id="sheet" hidden>
-  <nav aria-label="Main">
-    <a href="#why-cyprus">Why Cyprus</a><a href="#service">Our Service</a><a href="#story">Our Story</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="sheet-foot">
-    <a class="btn btn-ink" href="#contact">Book a free consultation</a>
-  </div>
+  <nav aria-label="Main"><a href="#why-cyprus">Why Cyprus</a><a href="#service">Our Service</a><a href="#story">Our Story</a><a href="#contact">Contact</a></nav>
+  <a class="btn btn-gold" href="#contact">Book a free consultation<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 </div>
 
 <main id="main">
 
-<!-- 2. Hero -->
+<!-- Hero: an aerial photograph of Paphos, a heavy two-tone headline, pills and one gold call to action -->
 <section class="hero" id="top">
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <p class="label">Cyprus Property Specialists</p>
-      <h1 class="split">Your home in Cyprus, handled from start to finish.</h1>
-      <p class="lede">Momentum Capital Group guides buyers from the UK and across Europe through every step of buying property in Cyprus, whether you’re relocating, buying a holiday home or planning your retirement in the sun.</p>
-      <p class="promise">You choose the property. We take care of everything else.</p>
-      <div class="actions">
-        <a class="btn btn-ink" href="#contact">Book a free consultation<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-line wa-link" href="#contact"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Chat on WhatsApp</a>
-      </div>
-      <ul class="facts">
-        <li><svg class="eu-ico" aria-hidden="true"><use href="#i-eu"/></svg>EU member state</li>
-        <li><svg aria-hidden="true"><use href="#i-euro"/></svg>The euro</li>
-        <li><svg aria-hidden="true"><use href="#i-law"/></svg>Legal system based on English law</li>
-      </ul>
+    <p class="tag up">Cyprus Property Specialists</p>
+    <h1 class="up"><span>Your home in Cyprus,</span> <span class="gold">handled from start to finish.</span></h1>
+    <p class="lede up">Momentum Capital Group guides buyers from the UK and across Europe through every step of buying property in Cyprus, whether you’re relocating, buying a holiday home or planning your retirement in the sun.</p>
+    <ul class="pills up">
+      <li><svg aria-hidden="true"><use href="#i-eu"/></svg>EU member state</li>
+      <li><svg aria-hidden="true"><use href="#i-euro"/></svg>The euro</li>
+      <li><svg aria-hidden="true"><use href="#i-law"/></svg>Legal system based on English law</li>
+    </ul>
+    <div class="actions up">
+      <a class="btn btn-gold btn-lg" href="#contact">Book a free consultation<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-glass wa-link" href="#contact"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Chat on WhatsApp</a>
     </div>
+    </div>
+    <!-- the aerial photograph of Paphos in a tall arched frame, like a Mediterranean window -->
+    <figure class="hero-arch">
+      <div class="hero-media"><img src="assets/paphos-dusk.webp" alt="Paphos from the air at dusk: the seafront, the harbour and the castle" fetchpriority="high"></div>
+      <figcaption>Paphos, Cyprus</figcaption>
+    </figure>
   </div>
-  <p class="hero-scroll" aria-hidden="true"><span></span>Scroll</p>
+  <a class="hero-down" href="#who">Scroll <span aria-hidden="true">↓</span></a>
 </section>
 
-<!-- 4. Who we help -->
-<section class="sec" id="who">
+<!-- A slow band of the services, between the hero and the page; it speeds up a little as you scroll -->
+<div class="marquee" aria-label="Our services">
+  <div class="marquee-track">
+    <ul><li>Property search</li><li>Viewings</li><li>Independent legal support</li><li>Banking &amp; mortgages</li><li>Residency guidance</li><li>Property management</li><li>Settling in</li></ul>
+    <ul aria-hidden="true"><li>Property search</li><li>Viewings</li><li>Independent legal support</li><li>Banking &amp; mortgages</li><li>Residency guidance</li><li>Property management</li><li>Settling in</li></ul>
+  </div>
+</div>
+
+<!-- Who we help -->
+<section class="sec light" id="who">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="label">Who we help</p>
-      <h2 class="split">Whatever brings you to Cyprus, we’ve done it before.</h2>
+    <header class="head-l">
+      <div>
+        <p class="tag rv">Who we help</p>
+        <h2 class="split">Whatever brings you to Cyprus, <em class="gold">we’ve done it before.</em></h2>
+      </div>
+      <p class="sub rv">You choose the property. We take care of everything else.</p>
     </header>
     <div class="cards4">
-      <article class="card rv"><span class="no">01</span><h3>Relocating</h3><p>A new life for you and your family. We help you choose the right area, the right home and settle in with confidence.</p></article>
-      <article class="card rv"><span class="no">02</span><h3>A holiday home</h3><p>Your own place in the sun, ready whenever you are and looked after when you’re away.</p></article>
-      <article class="card rv"><span class="no">03</span><h3>Retiring in the sun</h3><p>A slower pace of life, a warm climate and a welcoming community, close to good healthcare.</p></article>
-      <article class="card rv"><span class="no">04</span><h3>Investing</h3><p>Hand-picked properties with strong rental demand, selected with the same care as a home.</p></article>
+      <article class="card rv"><span class="num">01</span><h3>Relocating</h3><p>A new life for you and your family. We help you choose the right area, the right home and settle in with confidence.</p></article>
+      <article class="card rv"><span class="num">02</span><h3>A holiday home</h3><p>Your own place in the sun, ready whenever you are and looked after when you’re away.</p></article>
+      <article class="card rv"><span class="num">03</span><h3>Retiring in the sun</h3><p>A slower pace of life, a warm climate and a welcoming community, close to good healthcare.</p></article>
+      <article class="card rv"><span class="num">04</span><h3>Investing</h3><p>Hand-picked properties with strong rental demand, selected with the same care as a home.</p></article>
     </div>
   </div>
 </section>
 
-<!-- 5. Why Cyprus -->
-<section class="sec alt" id="why-cyprus">
+<!-- The sunrise: a real-looking sunrise over the sea, played by the scroll while the frame stays in place; when it ends,
+     the sun lifts out of the picture and flies to the sun icon of "Over 300 days of sunshine" (assets/sun.js).
+     Frames: assets/sunrise/ (16:9) and assets/sunrise-m/ (3:4), cut from a generated clip with FFmpeg. -->
+<section class="sunfilm" id="sunrise" aria-labelledby="sun-h">
+  <div class="sunfilm-pin">
+    <canvas class="sun-frames" aria-hidden="true"></canvas>
+    <img class="sun-poster" src="assets/sunrise/f081.webp" alt="" aria-hidden="true">
+    <div class="sunfilm-copy">
+      <p class="tag">Why Cyprus</p>
+      <h2 id="sun-h">Life is better <em>in the sun.</em></h2>
+    </div>
+  </div>
+</section>
+<!-- Why Cyprus: one grid of tiles in different sizes, photographs and reasons together -->
+<section class="sec light why" id="why-cyprus">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="label">Why Cyprus</p>
-      <h2 class="split big">Life is better in the sun.</h2>
-    </header>
-    <div class="grid3">
-      <div class="pt rv"><svg class="ico" aria-hidden="true"><use href="#i-sun"/></svg><h3>Over 300 days of sunshine</h3><p>Mild winters, long summers and a life lived outdoors.</p></div>
-      <div class="pt rv"><svg class="ico eu-ico" aria-hidden="true"><use href="#i-eu"/></svg><h3>A European home</h3><p>An EU member state using the euro, with a legal system based on English law.</p></div>
-      <div class="pt rv"><svg class="ico" aria-hidden="true"><use href="#i-talk"/></svg><h3>English spoken everywhere</h3><p>From your lawyer to your local café.</p></div>
-      <div class="pt rv"><svg class="ico" aria-hidden="true"><use href="#i-plane"/></svg><h3>Easy to reach</h3><p>Direct flights from the UK and major cities across Europe.</p></div>
-      <div class="pt rv"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg><h3>Safe and welcoming</h3><p>Low crime, good healthcare and international schools.</p></div>
-      <div class="pt rv"><svg class="ico" aria-hidden="true"><use href="#i-tax"/></svg><h3>Tax-friendly</h3><p>Competitive tax rates and no inheritance tax.</p></div>
+    <h2 class="sr-only">Why Cyprus: life is better in the sun.</h2>
+    <div class="bento">
+      <figure class="tile t-photo t-a reveal"><img src="assets/blue-lagoon.webp" alt="The Blue Lagoon on the Akamas coast near Paphos, from the air" loading="lazy">
+        <figcaption><svg class="sun-dock" aria-hidden="true"><use href="#i-sun"/></svg><h3>Over 300 days of sunshine</h3><p>Mild winters, long summers and a life lived outdoors.</p></figcaption></figure>
+      <div class="tile t-navy reveal"><svg class="t-ico" aria-hidden="true"><use href="#i-eu"/></svg><h3>A European home</h3><p>An EU member state using the euro, with a legal system based on English law.</p></div>
+      <div class="tile t-copper reveal"><svg class="t-ico" aria-hidden="true"><use href="#i-tax"/></svg><h3>Tax-friendly</h3><p>Competitive tax rates and no inheritance tax.</p></div>
+      <div class="tile t-cream reveal"><svg class="t-ico" aria-hidden="true"><use href="#i-plane"/></svg><h3>Easy to reach</h3><p>Direct flights from the UK and major cities across Europe.</p></div>
+      <div class="tile t-cream reveal"><svg class="t-ico" aria-hidden="true"><use href="#i-shield"/></svg><h3>Safe and welcoming</h3><p>Low crime, good healthcare and international schools.</p></div>
+      <figure class="tile t-photo t-b reveal"><img src="assets/promenade.webp" alt="The seafront promenade and harbour of Paphos" loading="lazy">
+        <figcaption><svg aria-hidden="true"><use href="#i-talk"/></svg><h3>English spoken everywhere</h3><p>From your lawyer to your local café.</p></figcaption></figure>
     </div>
   </div>
 </section>
 
-<!-- 6-8. Why Momentum, our service and how it works, in one section -->
-<section class="sec" id="service">
+<!-- Our story, led by Itay on video: one main film and a row of short ones.
+     VIDEOS: put each file in assets/video/ and set data-video="assets/video/NAME.mp4" (and data-poster for its first frame) -->
+<section class="sec dark" id="story">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="label">Why Momentum</p>
-      <h2 class="split">Buying abroad is a big step. You shouldn’t take it alone.</h2>
-      <p class="body rv">Most agents sell you a property. We stay with you through the whole journey.</p>
+    <div class="story">
+      <div class="story-copy">
+        <p class="tag rv">About us</p>
+        <h2 class="split">To truly understand a market, <em class="gold">you have to live it.</em></h2>
+        <div class="body rv">
+          <p>It all began with family property deals that brought me to Paphos. The deeper I got into the market, the clearer it became how fast the city was changing and which areas held real potential. So I moved there to learn the market from the inside.</p>
+          <details class="more"><summary>Read the full story</summary>
+          <p>For a year I lived Paphos day to day: its neighbourhoods, purchase and rental prices, where demand was growing and which new projects were worth a buyer’s attention. Along the way I built close relationships with the island’s leading developers and companies.</p>
+          <p>Since then, I’ve personally guided many buyers from the UK and across Europe, couples and families relocating to Cyprus or finding the holiday home that’s right for them. Today, Momentum Capital Group brings that experience to every client, with a team and a network that take care of every step.</p>
+          </details>
+        </div>
+        <blockquote class="quote rv">“Every client is treated the way I’d want my own family to be.”</blockquote>
+        <a class="btn btn-gold rv" href="#contact">Speak with Itay<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <button class="film reveal" type="button" data-video="" aria-label="Play the film: Itay Hazan">
+        <img src="assets/itai-portrait.jpg" alt="" loading="lazy">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+        <span class="film-cap"><b>Itay Hazan</b>[Film title]</span>
+      </button>
+    </div>
+    <div class="reels">
+      <button class="reel rv" type="button" data-video="" aria-label="Play video"><img src="assets/castle.webp" alt="" loading="lazy"><span class="play sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="reel-cap">[Video title]</span></button>
+      <button class="reel rv" type="button" data-video="" aria-label="Play video"><img src="assets/promenade.webp" alt="" loading="lazy"><span class="play sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="reel-cap">[Video title]</span></button>
+      <button class="reel rv" type="button" data-video="" aria-label="Play video"><img src="assets/blue-lagoon.webp" alt="" loading="lazy"><span class="play sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="reel-cap">[Video title]</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- Why Momentum, then the five steps: the heading stays while the steps pass by -->
+<section class="sec grey" id="service">
+  <div class="wrap">
+    <header class="head-l">
+      <div>
+        <p class="tag rv">Why Momentum</p>
+        <h2 class="split">Buying abroad is a big step. <em class="gold">You shouldn’t take it alone.</em></h2>
+      </div>
+      <p class="sub rv">Most agents sell you a property. We stay with you through the whole journey.</p>
     </header>
     <div class="edge">
-      <div class="pt rv"><h3>On the ground in Cyprus</h3><p>We know the neighbourhoods, the prices and where the market is heading, because we’ve lived it.</p></div>
-      <div class="pt rv"><h3>Hand-picked, not mass-listed</h3><p>We work with selected developers and show you only properties we’d recommend to our own family.</p></div>
-      <div class="pt rv"><h3>A trusted local network</h3><p>Independent lawyers, banks, mortgage advisers and property managers we’ve worked with many times.</p></div>
-      <div class="pt rv"><h3>One point of contact</h3><p>A dedicated advisor by your side, from the first call to long after you get your keys.</p></div>
+      <div class="ecard rv"><span class="circle">1</span><h3>On the ground in Cyprus</h3><p>We know the neighbourhoods, the prices and where the market is heading, because we’ve lived it.</p></div>
+      <div class="ecard rv"><span class="circle">2</span><h3>Hand-picked, not mass-listed</h3><p>We work with selected developers and show you only properties we’d recommend to our own family.</p></div>
+      <div class="ecard rv"><span class="circle">3</span><h3>A trusted local network</h3><p>Independent lawyers, banks, mortgage advisers and property managers we’ve worked with many times.</p></div>
+      <div class="ecard rv"><span class="circle">4</span><h3>One point of contact</h3><p>A dedicated advisor by your side, from the first call to long after you get your keys.</p></div>
     </div>
-    <div class="process">
-      <h3 class="sub rv">From first call to your keys, in five clear steps.</h3>
-      <ol class="steps">
-        <li class="rv"><span class="dot">1</span><h3>We listen</h3><p>A relaxed conversation about your plans, budget and the life you want in Cyprus.</p></li>
-        <li class="rv"><span class="dot">2</span><h3>We search</h3><p>We shortlist properties that genuinely fit you.</p></li>
-        <li class="rv"><span class="dot">3</span><h3>We guide</h3><p>Viewings in person or by video, with honest advice at every stage.</p></li>
-        <li class="rv"><span class="dot">4</span><h3>We handle the details</h3><p>Lawyer, bank, mortgage and paperwork, all coordinated for you.</p></li>
-        <li class="rv"><span class="dot">5</span><h3>We stay with you</h3><p>Through completion, handover and beyond.</p></li>
-      </ol>
+  </div>
+  <div class="wrap pinned">
+    <div class="pin-side">
+      <div class="pin-sticky">
+        <p class="tag">How it works</p>
+        <h3 class="pin-title">From first call to your keys, in five clear steps.</h3>
+        <div class="pin-meter" aria-hidden="true"><span></span></div>
+        <p class="pin-count" aria-hidden="true"><b>01</b> / 05</p>
+        <p class="roof-t">Everything you need, under one roof.</p>
+        <ul class="chips"><li>Property search</li><li>Viewings</li><li>Independent legal support</li><li>Banking &amp; mortgages</li><li>Residency guidance</li><li>Property management</li><li>Settling in</li></ul>
+      </div>
     </div>
-    <div class="roof rv">
-      <p class="sub">Everything you need, under one roof.</p>
-      <ul class="chips">
-        <li>Property search</li><li>Viewings</li><li>Independent legal support</li><li>Banking &amp; mortgages</li>
-        <li>Residency guidance</li><li>Property management</li><li>Settling in</li>
-      </ul>
-    </div>
+    <ol class="psteps">
+      <li><span class="pn">01</span><h4>We listen</h4><p>A relaxed conversation about your plans, budget and the life you want in Cyprus.</p></li>
+      <li><span class="pn">02</span><h4>We search</h4><p>We shortlist properties that genuinely fit you.</p></li>
+      <li><span class="pn">03</span><h4>We guide</h4><p>Viewings in person or by video, with honest advice at every stage.</p></li>
+      <li><span class="pn">04</span><h4>We handle the details</h4><p>Lawyer, bank, mortgage and paperwork, all coordinated for you.</p></li>
+      <li><span class="pn">05</span><h4>We stay with you</h4><p>Through completion, handover and beyond.</p></li>
+    </ol>
   </div>
 </section>
 
-<!-- 9. Our story -->
-<section class="sec alt" id="story">
-  <div class="wrap story">
-    <figure class="portrait rv">
-      <img src="assets/itai-portrait.jpg" alt="Itay Hazan" width="1080" height="1080" loading="lazy">
-      <figcaption><b>Itay Hazan</b></figcaption>
-    </figure>
-    <div class="story-copy">
-      <p class="label">About us</p>
-      <h2 class="split">To truly understand a market, you have to live it.</h2>
-      <div class="body rv">
-        <p>It all began with family property deals that brought me to Paphos. The deeper I got into the market, the clearer it became how fast the city was changing and which areas held real potential. So I moved there to learn the market from the inside.</p>
-        <details class="more"><summary>Read the full story</summary>
-        <p>For a year I lived Paphos day to day: its neighbourhoods, purchase and rental prices, where demand was growing and which new projects were worth a buyer’s attention. Along the way I built close relationships with the island’s leading developers and companies.</p>
-        <p>Since then, I’ve personally guided many buyers from the UK and across Europe, couples and families relocating to Cyprus or finding the holiday home that’s right for them. Today, Momentum Capital Group brings that experience to every client, with a team and a network that take care of every step.</p>
-        </details>
-      </div>
-      <blockquote class="quote rv">“Every client is treated the way I’d want my own family to be.”</blockquote>
-      <a class="btn btn-ink rv" href="#contact">Speak with Itay<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- 10 + 11. Buying from the UK / from Europe -->
-<section class="sec buyers" aria-label="Buying from the UK and from Europe">
-  <div class="wrap pair">
-    <article class="panel" id="uk">
-      <h2 class="split">Buying in Cyprus after Brexit? It’s simpler than you think.</h2>
-      <p class="body rv">Cyprus has long been a favourite with British buyers, and it still is. UK citizens can buy property here with a straightforward permission process, which your lawyer handles as part of the purchase. Qualifying purchases can also open a route to residency.</p>
-      <div class="list">
-        <div class="li rv"><h3>A familiar feel</h3><p>A legal system based on English law, English spoken everywhere, and they even drive on the left.</p></div>
-        <div class="li rv"><h3>A large British community</h3><p>Especially in Paphos, with clubs, English-speaking doctors and schools.</p></div>
-        <div class="li rv"><h3>Short flights home</h3><p>Direct flights to London and other UK cities.</p></div>
-        <div class="li rv"><h3>Residency support</h3><p>We’ll guide you to the right route for your situation.</p></div>
-      </div>
-    </article>
-    <article class="panel" id="europe">
-      <svg class="panel-eu eu-ico" aria-hidden="true"><use href="#i-eu"/></svg>
-      <h2 class="split">An EU home in the Mediterranean sun.</h2>
-      <p class="body rv">As an EU citizen, you can buy property in Cyprus with the same rights as locals, live here freely and pay in euros. Whether you’re coming from Germany, the Netherlands, Scandinavia or anywhere else in Europe, we’ll make the process clear and simple.</p>
-      <div class="list">
-        <div class="li rv"><h3>No extra permissions</h3><p>EU citizens buy on the same terms as Cypriots.</p></div>
-        <div class="li rv"><h3>The euro</h3><p>No currency risk and no exchange fees.</p></div>
-        <div class="li rv"><h3>Freedom to live here</h3><p>Move, work or retire without a residency investment.</p></div>
-        <div class="li rv"><h3>Support in your language</h3><p>English and German, with documents explained clearly.</p></div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- 12. Where we work: the camera lands on Paphos while this section is pinned, a line runs from the words to the town,
-     then the map gives way to a drawing of Paphos that draws itself as you scroll -->
-<section class="loc" id="locations" aria-labelledby="loc-h">
-  <div class="loc-pin">
-    <svg class="lead" aria-hidden="true"><path pathLength="1" d="M0 0"/></svg>
-    <div class="paphos-art" aria-hidden="true"></div>
-    <div class="wrap loc-in">
-      <p class="label">Locations</p>
-      <h2 class="split" id="loc-h">Paphos.</h2>
-      <ul class="pfacts">
-        <li data-at="0.3">Relaxed, green and by the sea.</li>
-        <li data-at="0.4">The island’s largest British community.</li>
-        <li data-at="0.5">Its own international airport.</li>
-      </ul>
-      <div class="loc-cta" data-at="0.9">
-        <p><em>Not sure where to start? That’s exactly what our first call is for.</em></p>
-        <a class="btn btn-ink" href="#contact">Book a free consultation<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 13. Client stories -->
-<section class="sec alt" id="stories">
+<!-- Buying from the UK / from Europe: one panel, two tabs -->
+<section class="sec light" id="buying" aria-labelledby="buy-h">
   <div class="wrap">
-    <header class="sec-head row">
-      <div>
-        <p class="label">Client stories</p>
-        <h2 class="split">Families who made the move with us.</h2>
-      </div>
-      <div class="sw-nav">
-        <button class="sw-prev" type="button" aria-label="Previous story"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <span class="sw-count"></span>
-        <button class="sw-next" type="button" aria-label="Next story"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <header class="head-c">
+      <p class="tag rv">Where are you buying from?</p>
+      <div class="tabs rv" role="tablist" aria-label="Where are you buying from?">
+        <span class="tab-pill" aria-hidden="true"></span>
+        <button class="tab on" role="tab" id="tab-uk" aria-selected="true" aria-controls="uk">From the UK</button>
+        <button class="tab" role="tab" id="tab-eu" aria-selected="false" aria-controls="europe" tabindex="-1">From the EU</button>
       </div>
     </header>
-    <div class="swiper stories rv">
-      <div class="swiper-wrapper">
-        <figure class="swiper-slide story-q"><blockquote>“[Quote from client]”</blockquote><figcaption><b>[First name &amp; first name], [City, Country]</b>relocated to Paphos</figcaption></figure>
-        <figure class="swiper-slide story-q"><blockquote>“[Quote from client]”</blockquote><figcaption><b>[First name], [City, Country]</b>bought a holiday home in Paphos</figcaption></figure>
-        <figure class="swiper-slide story-q"><blockquote>“[Quote from client]”</blockquote><figcaption><b>[First name &amp; first name], [City, Country]</b>retired to Cyprus</figcaption></figure>
-      </div>
+    <div class="tab-panels rv">
+      <article class="panel" id="uk" role="tabpanel" aria-labelledby="tab-uk">
+        <div class="panel-head">
+          <h2 id="buy-h">Buying in Cyprus after Brexit? <em class="gold">It’s simpler than you think.</em></h2>
+          <p class="body">Cyprus has long been a favourite with British buyers, and it still is. UK citizens can buy property here with a straightforward permission process, which your lawyer handles as part of the purchase. Qualifying purchases can also open a route to residency.</p>
+        </div>
+        <ul class="ticks">
+          <li><b>A familiar feel</b> A legal system based on English law, English spoken everywhere, and they even drive on the left.</li>
+          <li><b>A large British community</b> Especially in Paphos, with clubs, English-speaking doctors and schools.</li>
+          <li><b>Short flights home</b> Direct flights to London and other UK cities.</li>
+          <li><b>Residency support</b> We’ll guide you to the right route for your situation.</li>
+        </ul>
+      </article>
+      <article class="panel" id="europe" role="tabpanel" aria-labelledby="tab-eu" hidden>
+        <svg class="panel-eu" aria-hidden="true"><use href="#i-eu"/></svg>
+        <div class="panel-head">
+          <h2>An EU home in the <em class="gold">Mediterranean sun.</em></h2>
+          <p class="body">As an EU citizen, you can buy property in Cyprus with the same rights as locals, live here freely and pay in euros. Whether you’re coming from Germany, the Netherlands, Scandinavia or anywhere else in Europe, we’ll make the process clear and simple.</p>
+        </div>
+        <ul class="ticks">
+          <li><b>No extra permissions</b> EU citizens buy on the same terms as Cypriots.</li>
+          <li><b>The euro</b> No currency risk and no exchange fees.</li>
+          <li><b>Freedom to live here</b> Move, work or retire without a residency investment.</li>
+          <li><b>Support in your language</b> English and German, with documents explained clearly.</li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- 14. Contact -->
+<!-- Paphos: a dark full-bleed band over the aerial photograph -->
+<section class="paphos" id="locations" aria-labelledby="loc-h">
+  <div class="paphos-media" aria-hidden="true"><img src="assets/castle.webp" alt="" loading="lazy"></div>
+  <div class="wrap paphos-in">
+    <p class="tag rv">Locations</p>
+    <h2 class="split" id="loc-h">Paphos<span class="gold">.</span></h2>
+    <ul class="pills rv">
+      <li>Relaxed, green and by the sea.</li>
+      <li>The island’s largest British community.</li>
+      <li>Its own international airport.</li>
+    </ul>
+    <p class="lede rv">Not sure where to start? That’s exactly what our first call is for.</p>
+    <a class="btn btn-gold btn-lg rv" href="#contact">Book a free consultation<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- Client stories -->
+<!-- Client stories: two family films, then two rows of reviews drifting in opposite directions (they pause under the pointer).
+     LAUNCH: real quotes, names, cities and photos from the client; the films go in data-video like Itay's. -->
+<section class="sec grey" id="stories">
+  <div class="wrap">
+    <header class="head-l">
+      <div>
+        <p class="tag rv">Client stories</p>
+        <h2 class="split">Families who made the move <em class="gold">with us.</em></h2>
+      </div>
+    </header>
+    <div class="fam-films">
+      <button class="fam-film reveal" type="button" data-video="" aria-label="Play a family's story"><img src="assets/promenade.webp" alt="" loading="lazy"><span class="play sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="fam-cap"><b>[Family name], [City, Country]</b>relocated to Paphos</span></button>
+      <button class="fam-film reveal" type="button" data-video="" aria-label="Play a family's story"><img src="assets/castle.webp" alt="" loading="lazy"><span class="play sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="fam-cap"><b>[Family name], [City, Country]</b>bought a holiday home in Paphos</span></button>
+    </div>
+  </div>
+  <div class="reviews" aria-label="Reviews from families">
+    <div class="rev-row"><div class="rev-track">
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I had been interested in investing in land in Cyprus for a while, but I didn’t know where to start. Momentum helped me explore different locations, understand the opportunities, and find a property that matched my budget. The team was patient and professional throughout the process. What seemed complicated at first became much easier with their guidance. I’m very happy with my decision!”</blockquote><figcaption><span class="avatar" aria-hidden="true">SL</span><span><b>Sophie Laurent</b>Paris, France</span></figcaption></figure>
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“Investing abroad was completely new to me, so naturally I had plenty of questions. Momentum walked me through the entire process of purchasing land in Cyprus and helped me understand what to consider before making a decision. I particularly appreciated their clear communication and personal approach. A great experience for a first-time international investor.”</blockquote><figcaption><span class="avatar" aria-hidden="true">JW</span><span><b>James Wilson</b>London, United Kingdom</span></figcaption></figure>
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I wanted to diversify my investments and started looking into land opportunities in Cyprus. After speaking with Momentum, I felt much more confident about the process. They helped me compare different options and understand the important details before moving forward. I never felt pressured into making a decision, which was really important to me. Highly recommended!”</blockquote><figcaption><span class="avatar" aria-hidden="true">IR</span><span><b>Isabella Romano</b>Milan, Italy</span></figcaption></figure>
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“My experience with Momentum was excellent. I was looking for a long-term land investment in Cyprus, and their team helped me narrow down the available opportunities based on my goals. They answered my questions clearly and kept me informed throughout the process. I appreciated their organized approach and attention to detail.”</blockquote><figcaption><span class="avatar" aria-hidden="true">LS</span><span><b>Lukas Schneider</b>Berlin, Germany</span></figcaption></figure>
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I never imagined I would invest in property outside Sweden, but Cyprus caught my attention. Momentum helped me understand the local land market and what I needed to consider as a foreign buyer. Their team was friendly, responsive, and very supportive. I appreciated having someone to guide me through an unfamiliar process.”</blockquote><figcaption><span class="avatar" aria-hidden="true">EJ</span><span><b>Emma Johansson</b>Stockholm, Sweden</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I had been interested in investing in land in Cyprus for a while, but I didn’t know where to start. Momentum helped me explore different locations, understand the opportunities, and find a property that matched my budget. The team was patient and professional throughout the process. What seemed complicated at first became much easier with their guidance. I’m very happy with my decision!”</blockquote><figcaption><span class="avatar" aria-hidden="true">SL</span><span><b>Sophie Laurent</b>Paris, France</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“Investing abroad was completely new to me, so naturally I had plenty of questions. Momentum walked me through the entire process of purchasing land in Cyprus and helped me understand what to consider before making a decision. I particularly appreciated their clear communication and personal approach. A great experience for a first-time international investor.”</blockquote><figcaption><span class="avatar" aria-hidden="true">JW</span><span><b>James Wilson</b>London, United Kingdom</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I wanted to diversify my investments and started looking into land opportunities in Cyprus. After speaking with Momentum, I felt much more confident about the process. They helped me compare different options and understand the important details before moving forward. I never felt pressured into making a decision, which was really important to me. Highly recommended!”</blockquote><figcaption><span class="avatar" aria-hidden="true">IR</span><span><b>Isabella Romano</b>Milan, Italy</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“My experience with Momentum was excellent. I was looking for a long-term land investment in Cyprus, and their team helped me narrow down the available opportunities based on my goals. They answered my questions clearly and kept me informed throughout the process. I appreciated their organized approach and attention to detail.”</blockquote><figcaption><span class="avatar" aria-hidden="true">LS</span><span><b>Lukas Schneider</b>Berlin, Germany</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I never imagined I would invest in property outside Sweden, but Cyprus caught my attention. Momentum helped me understand the local land market and what I needed to consider as a foreign buyer. Their team was friendly, responsive, and very supportive. I appreciated having someone to guide me through an unfamiliar process.”</blockquote><figcaption><span class="avatar" aria-hidden="true">EJ</span><span><b>Emma Johansson</b>Stockholm, Sweden</span></figcaption></figure>
+    </div></div>
+    <div class="rev-row rev-back"><div class="rev-track">
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I had been researching land investments in Cyprus for months but struggled to understand which opportunities suited me. Momentum made the research process much more manageable. They listened to my expectations, presented different possibilities, and helped me evaluate my options. I appreciated their patience and the time they dedicated to answering my questions.”</blockquote><figcaption><span class="avatar" aria-hidden="true">AG</span><span><b>Alejandro García</b>Madrid, Spain</span></figcaption></figure>
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“What I liked most about Momentum was their personal approach. I wasn’t looking for just any piece of land in Cyprus. I wanted something that made sense for my long-term investment plans. The team took the time to understand what I was looking for and helped me explore suitable opportunities. I felt supported throughout the entire experience.”</blockquote><figcaption><span class="avatar" aria-hidden="true">OV</span><span><b>Olivia de Vries</b>Amsterdam, Netherlands</span></figcaption></figure>
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“Buying land overseas can feel intimidating, especially when you’re unfamiliar with the local market. Momentum helped me understand the different stages involved in investing in Cyprus. They were available whenever I had questions and made sure I understood the information before making decisions. Their support made the experience much more comfortable.”</blockquote><figcaption><span class="avatar" aria-hidden="true">TD</span><span><b>Thomas Dubois</b>Lyon, France</span></figcaption></figure>
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I was looking for an alternative to traditional property investments when I discovered land opportunities in Cyprus. Momentum helped me explore this option and understand the differences between several locations. The team communicated clearly and gave me the space to make my own decisions. I’m grateful for the guidance and the professional service I received.”</blockquote><figcaption><span class="avatar" aria-hidden="true">AK</span><span><b>Anna Kowalska</b>Warsaw, Poland</span></figcaption></figure>
+        <figure class="qcard"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“A colleague first introduced me to the idea of investing in land in Cyprus. After contacting Momentum, I started learning more about the market and the purchasing process. Their team helped me review different opportunities and better understand the considerations involved. It was reassuring to have experienced people available to answer my questions. A very positive experience!”</blockquote><figcaption><span class="avatar" aria-hidden="true">MB</span><span><b>Marco Bianchi</b>Rome, Italy</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I had been researching land investments in Cyprus for months but struggled to understand which opportunities suited me. Momentum made the research process much more manageable. They listened to my expectations, presented different possibilities, and helped me evaluate my options. I appreciated their patience and the time they dedicated to answering my questions.”</blockquote><figcaption><span class="avatar" aria-hidden="true">AG</span><span><b>Alejandro García</b>Madrid, Spain</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“What I liked most about Momentum was their personal approach. I wasn’t looking for just any piece of land in Cyprus. I wanted something that made sense for my long-term investment plans. The team took the time to understand what I was looking for and helped me explore suitable opportunities. I felt supported throughout the entire experience.”</blockquote><figcaption><span class="avatar" aria-hidden="true">OV</span><span><b>Olivia de Vries</b>Amsterdam, Netherlands</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“Buying land overseas can feel intimidating, especially when you’re unfamiliar with the local market. Momentum helped me understand the different stages involved in investing in Cyprus. They were available whenever I had questions and made sure I understood the information before making decisions. Their support made the experience much more comfortable.”</blockquote><figcaption><span class="avatar" aria-hidden="true">TD</span><span><b>Thomas Dubois</b>Lyon, France</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“I was looking for an alternative to traditional property investments when I discovered land opportunities in Cyprus. Momentum helped me explore this option and understand the differences between several locations. The team communicated clearly and gave me the space to make my own decisions. I’m grateful for the guidance and the professional service I received.”</blockquote><figcaption><span class="avatar" aria-hidden="true">AK</span><span><b>Anna Kowalska</b>Warsaw, Poland</span></figcaption></figure>
+        <figure class="qcard" aria-hidden="true"><span class="stars" aria-label="5 out of 5">★★★★★</span><blockquote>“A colleague first introduced me to the idea of investing in land in Cyprus. After contacting Momentum, I started learning more about the market and the purchasing process. Their team helped me review different opportunities and better understand the considerations involved. It was reassuring to have experienced people available to answer my questions. A very positive experience!”</blockquote><figcaption><span class="avatar" aria-hidden="true">MB</span><span><b>Marco Bianchi</b>Rome, Italy</span></figcaption></figure>
+    </div></div>
+  </div>
+</section>
+
+<!-- Contact -->
 <section class="sec dark" id="contact">
   <div class="wrap contact">
     <div class="contact-copy">
-      <p class="label">Contact</p>
-      <h2 class="split">Your first step: a free, private consultation.</h2>
+      <p class="tag rv">Contact</p>
+      <h2 class="split">Your first step: <em class="gold">a free, private consultation.</em></h2>
       <p class="body rv">Tell us a little about your plans and we’ll get back to you within 24 hours. No pressure, no obligation, just honest advice.</p>
       <div class="talk rv">
         <p>Prefer to talk now?</p>
         <a class="wa-link" href="#contact"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Chat with us on WhatsApp</a>
-        <span>[Email]</span>
-        <span>[Phone]</span>
+        <span>[Email]</span><span>[Phone]</span>
       </div>
     </div>
     <form class="form rv" id="form" novalidate>
@@ -276,7 +344,7 @@
         </select></label>
       </div>
       <label>Message<textarea name="message" rows="4"></textarea></label>
-      <button class="btn btn-paper" type="submit">Book my consultation<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <button class="btn btn-gold btn-lg" type="submit">Book my consultation<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></button>
       <p class="sent" role="status" hidden>Thank you! We’ve received your details and will be in touch within 24 hours.</p>
     </form>
   </div>
@@ -284,44 +352,45 @@
 
 </main>
 
-<!-- 15. Footer -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-top">
       <div>
         <img class="foot-logo" src="assets/logo-paper.svg" alt="Momentum Capital Group" width="172" height="31">
         <p class="tagline">Your trusted partner for property in Cyprus.</p>
+        <a class="btn btn-gold" href="#contact">Book a free consultation<svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
-      <nav class="foot-links" aria-label="Footer">
-        <a href="#why-cyprus">Why Cyprus</a><a href="#service">Our Service</a><a href="#story">Our Story</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="foot-contact">
-        <span>[Email]</span><span>[Phone / WhatsApp]</span><span>[Office address, Paphos]</span>
-        <p class="social"><span>Instagram</span><span>Facebook</span><span>YouTube</span><span>TikTok</span></p>
-      </div>
+      <nav class="foot-col" aria-label="Footer"><p>Explore</p><a href="#why-cyprus">Why Cyprus</a><a href="#service">Our Service</a><a href="#story">Our Story</a><a href="#contact">Contact</a></nav>
+      <div class="foot-col"><p>Contact</p><span>[Email]</span><span>[Phone / WhatsApp]</span><span>[Office address, Paphos]</span></div>
+      <div class="foot-col"><p>Social media</p><span>Instagram</span><span>Facebook</span><span>YouTube</span><span>TikTok</span></div>
     </div>
     <div class="foot-base">
       <p>© 2026 Momentum Capital Group. All rights reserved.</p>
       <p class="disclaimer">The information on this website is for general guidance only and does not constitute legal, financial or tax advice. Property values can go down as well as up.</p>
+      <p class="credit">Photographs: Unsplash (Secret Travel Guide, Sergei Gussev, Erik Karits).</p>
     </div>
   </div>
 </footer>
 
+<!-- the video player: opens over the page for any [data-video] -->
+<dialog class="vmodal" aria-label="Video">
+  <button class="vclose" type="button" aria-label="Close video"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="vbox"><video controls playsinline preload="none"></video><p class="vsoon" hidden>[Video coming soon]</p></div>
+</dialog>
+
 <a class="wa-float wa-link" href="#contact" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12.00 1.60L14.59 9.04L22.46 9.20L16.18 13.96L18.47 21.50L12.00 17.00L5.53 21.50L7.82 13.96L1.54 9.20L9.41 9.04Z"/></symbol>
-  <symbol id="i-eu" viewBox="0 0 24 24"><path fill="currentColor" d="M12.00 1.50L12.45 2.79L13.81 2.81L12.72 3.63L13.12 4.94L12.00 4.16L10.88 4.94L11.28 3.63L10.19 2.81L11.55 2.79ZM16.30 2.65L16.75 3.94L18.11 3.97L17.02 4.79L17.42 6.09L16.30 5.31L15.18 6.09L15.58 4.79L14.49 3.97L15.85 3.94ZM19.45 5.80L19.89 7.09L21.25 7.11L20.17 7.93L20.56 9.24L19.45 8.46L18.33 9.24L18.73 7.93L17.64 7.11L19.00 7.09ZM20.60 10.10L21.05 11.39L22.41 11.41L21.32 12.23L21.72 13.54L20.60 12.76L19.48 13.54L19.88 12.23L18.79 11.41L20.15 11.39ZM19.45 14.40L19.89 15.69L21.25 15.71L20.17 16.53L20.56 17.84L19.45 17.06L18.33 17.84L18.73 16.53L17.64 15.71L19.00 15.69ZM16.30 17.55L16.75 18.83L18.11 18.86L17.02 19.68L17.42 20.98L16.30 20.21L15.18 20.98L15.58 19.68L14.49 18.86L15.85 18.83ZM12.00 18.70L12.45 19.99L13.81 20.01L12.72 20.83L13.12 22.14L12.00 21.36L10.88 22.14L11.28 20.83L10.19 20.01L11.55 19.99ZM7.70 17.55L8.15 18.83L9.51 18.86L8.42 19.68L8.82 20.98L7.70 20.21L6.58 20.98L6.98 19.68L5.89 18.86L7.25 18.83ZM4.55 14.40L5.00 15.69L6.36 15.71L5.27 16.53L5.67 17.84L4.55 17.06L3.44 17.84L3.83 16.53L2.75 15.71L4.11 15.69ZM3.40 10.10L3.85 11.39L5.21 11.41L4.12 12.23L4.52 13.54L3.40 12.76L2.28 13.54L2.68 12.23L1.59 11.41L2.95 11.39ZM4.55 5.80L5.00 7.09L6.36 7.11L5.27 7.93L5.67 9.24L4.55 8.46L3.44 9.24L3.83 7.93L2.75 7.11L4.11 7.09ZM7.70 2.65L8.15 3.94L9.51 3.97L8.42 4.79L8.82 6.09L7.70 5.31L6.58 6.09L6.98 4.79L5.89 3.97L7.25 3.94Z"/></symbol>
-  <symbol id="i-euro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M17.5 6.2A7 7 0 1 0 17.5 17.8"/><path d="M4.5 10.2h9M4.5 13.8h9"/></g></symbol>
-  <symbol id="i-law" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M7 20h10M5 7h14"/><path d="M5 7l-2.6 6a2.6 2.6 0 0 0 5.2 0L5 7zM19 7l-2.6 6a2.6 2.6 0 0 0 5.2 0L19 7z"/></g></symbol>
-  <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></symbol>
-  <symbol id="i-talk" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M4 5.5h16v10H10l-4.5 3.8v-3.8H4z"/><path d="M8 9.5h8M8 12h5" stroke-linecap="round"/></g></symbol>
-  <symbol id="i-plane" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M21 12c0-.9-.8-1.5-1.7-1.5H14L9.6 3.5H7.8l2.3 7H5.5L3.8 8.3H2.5l1 3.7-1 3.7h1.3l1.7-2.2h4.6l-2.3 7h1.8L14 13.5h5.3c.9 0 1.7-.6 1.7-1.5z"/></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6"/></g></symbol>
-  <symbol id="i-tax" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M18 6L6 18"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></g></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.66.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.29Z"/></symbol>
+  <symbol id="i-eu" viewBox="0 0 24 24"><path fill="currentColor" d="M12.00 1.50L12.45 2.79L13.81 2.81L12.72 3.63L13.12 4.94L12.00 4.16L10.88 4.94L11.28 3.63L10.19 2.81L11.55 2.79ZM16.30 2.65L16.75 3.94L18.11 3.97L17.02 4.79L17.42 6.09L16.30 5.31L15.18 6.09L15.58 4.79L14.49 3.97L15.85 3.94ZM19.45 5.80L19.89 7.09L21.25 7.11L20.17 7.93L20.56 9.24L19.45 8.46L18.33 9.24L18.73 7.93L17.64 7.11L19.00 7.09ZM20.60 10.10L21.05 11.39L22.41 11.41L21.32 12.23L21.72 13.54L20.60 12.76L19.48 13.54L19.880 12.23L18.79 11.41L20.15 11.39ZM19.45 14.40L19.89 15.69L21.25 15.71L20.17 16.53L20.56 17.84L19.45 17.06L18.33 17.84L18.73 16.53L17.64 15.71L19.00 15.69ZM16.30 17.55L16.75 18.83L18.11 18.86L17.02 19.68L17.42 20.98L16.30 20.21L15.18 20.98L15.58 19.68L14.49 18.86L15.85 18.83ZM12.00 18.70L12.45 19.99L13.81 20.01L12.72 20.83L13.12 22.14L12.00 21.36L10.88 22.14L11.28 20.83L10.19 20.01L11.55 19.99ZM7.70 17.55L8.15 18.83L9.51 18.86L8.42 19.68L8.82 20.98L7.70 20.21L6.58 20.98L6.98 19.68L5.89 18.86L7.25 18.83ZM4.55 14.40L5.00 15.69L6.36 15.71L5.27 16.53L5.67 17.84L4.55 17.06L3.44 17.84L3.83 16.53L2.75 15.71L4.11 15.69ZM3.40 10.10L3.85 11.39L5.21 11.41L4.12 12.23L4.52 13.54L3.40 12.76L2.28 13.54L2.68 12.23L1.59 11.41L2.95 11.39ZM4.55 5.80L5.00 7.09L6.36 7.11L5.27 7.93L5.67 9.24L4.55 8.46L3.44 9.24L3.83 7.93L2.75 7.11L4.11 7.09ZM7.70 2.65L8.15 3.94L9.51 3.97L8.42 4.79L8.82 6.09L7.70 5.31L6.58 6.09L6.98 4.79L5.89 3.97L7.25 3.94Z"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M17.5 6.2A7 7 0 1 0 17.5 17.8"/><path d="M4.5 10.2h9M4.5 13.8h9"/></g></symbol>
+  <symbol id="i-law" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M7 20h10M5 7h14"/><path d="M5 7l-2.6 6a2.6 2.6 0 0 0 5.2 0L5 7zM19 7l-2.6 6a2.6 2.6 0 0 0 5.2 0L19 7z"/></g></symbol>
+  <symbol id="i-talk" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 5.5h16v10H10l-4.5 3.8v-3.8H4z"/><path d="M8 9.5h8M8 12h5" stroke-linecap="round"/></g></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M21 12c0-.9-.8-1.5-1.7-1.5H14L9.6 3.5H7.8l2.3 7H5.5L3.8 8.3H2.5l1 3.7-1 3.7h1.3l1.7-2.2h4.6l-2.3 7h1.8L14 13.5h5.3c.9 0 1.7-.6 1.700-1.5z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6"/></g></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></symbol>
+  <symbol id="i-tax" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M18 6L6 18"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.130 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.540 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.66.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.29Z"/></symbol>
 </svg>
 
 <script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js"></script>
@@ -329,96 +398,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@14.4.0/swiper-bundle.min.js"></script>
-<script src="assets/site.js?v=mwhtylcn"></script>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module">
-  import { island } from './assets/island.js?v=mwhtylcn';
-  /* Locations: the facts come one by one as the camera lands, and a line runs from them to Paphos; then the map
-     fades and the drawing of the town draws itself, stroke by stroke */
-  const lead = document.querySelector('.lead path'), first = document.querySelector('.pfacts li'), list = document.querySelector('.pfacts');
-  const steps = [...document.querySelectorAll('#locations [data-at]')];
-  const canvas = document.querySelector('.island'), pins = document.querySelector('.pins'), art = document.querySelector('.paphos-art');
-  /* the drawing of Paphos (a pen illustration) appears as ink seeping into paper: a faint pencil sketch comes into
-     focus, then the ink blooms out from a few drops with soft, fibrous, irregular edges and a darker wet rim where
-     it is still spreading, and last the colour of the sea comes in */
-  const inkTo = (() => {
-    const src = matchMedia('(max-width: 760px)').matches ? 'assets/paphos-drawn-m.webp' : 'assets/paphos-drawn.webp';
-    art.innerHTML = `<img class="ghost" src="${src}" alt="A drawing of Paphos harbour" decoding="async"><canvas class="inked"></canvas>`;
-    const img = art.firstElementChild, cv = art.lastElementChild, ctx = cv.getContext('2d');
-    /* when the ink reaches each point of the paper (0 to 1): spreading out from the drops, roughened by paper noise */
-    const FW = 300, FH = Math.round(FW * 1152 / 2688), field = new Float32Array(FW * FH);
-    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    const G = 64, grid = Array.from({ length: G * G }, rnd);
-    const vn = (x, y) => { const i = Math.floor(x), j = Math.floor(y), fx = x - i, fy = y - j, u = fx * fx * (3 - 2 * fx), v = fy * fy * (3 - 2 * fy);
-      const g = (a, b) => grid[((b % G + G) % G) * G + ((a % G + G) % G)];
-      return (g(i, j) * (1 - u) + g(i + 1, j) * u) * (1 - v) + (g(i, j + 1) * (1 - u) + g(i + 1, j + 1) * u) * v; };
-    const fbm = (x, y) => { let s = 0, a = 0.5; for (let o = 0; o < 5; o++) { s += a * vn(x, y); x *= 2.03; y *= 2.03; a *= 0.5; } return s; };
-    const drops = [[0.2, 0.42, 0], [0.44, 0.3, 0.1], [0.66, 0.5, 0.2], [0.32, 0.72, 0.28], [0.86, 0.62, 0.36], [0.58, 0.84, 0.46], [0.94, 0.3, 0.5]];
-    let lo = 9, hi = -9;
-    for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
-      const nx = x / FW, ny = y / FH;
-      let t = 9; for (const [dx, dy, d0] of drops) t = Math.min(t, d0 + Math.hypot((nx - dx) * 2.33, ny - dy) * 0.42);
-      t += (fbm(nx * 6, ny * 2.6) - 0.5) * 0.34 + (vn(nx * 90, ny * 39) - 0.5) * 0.05;
-      field[y * FW + x] = t; lo = Math.min(lo, t); hi = Math.max(hi, t);
-    }
-    for (let i = 0; i < field.length; i++) field[i] = (field[i] - lo) / (hi - lo);
-    const small = document.createElement('canvas'); small.width = FW; small.height = FH;
-    const sctx = small.getContext('2d'), mask = sctx.createImageData(FW, FH), rimSmall = document.createElement('canvas');
-    rimSmall.width = FW; rimSmall.height = FH;
-    const rctx = rimSmall.getContext('2d'), rim = rctx.createImageData(FW, FH), wet = document.createElement('canvas'), wctx = wet.getContext('2d');
-    let want = 0, drawn = -1, ready = false;
-    const paint = () => {
-      if (!ready || Math.abs(want - drawn) < 0.0015) return;
-      drawn = want;
-      const W = cv.width, H = cv.height;
-      ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, W, H);
-      if (want <= 0) return;
-      if (want >= 1) { ctx.drawImage(img, 0, 0, W, H); return; }
-      const front = want * 1.12, edge = 0.045;
-      for (let i = 0; i < field.length; i++) {
-        const d = front - field[i], a = Math.min(1, Math.max(0, d / edge + 0.5)), k = i * 4;
-        mask.data[k + 3] = (a * a * (3 - 2 * a)) * 255;
-        const r = Math.max(0, 1 - Math.abs(d - edge * 0.9) / (edge * 1.6));
-        rim.data[k + 3] = r * r * 255;
-      }
-      sctx.putImageData(mask, 0, 0); rctx.putImageData(rim, 0, 0);
-      ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(img, 0, 0, W, H);
-      ctx.globalCompositeOperation = 'destination-in'; ctx.drawImage(small, 0, 0, W, H);
-      /* the wet rim: the same drawing again, only along the spreading edge, multiplied in so the ink looks deeper there */
-      wctx.globalCompositeOperation = 'source-over'; wctx.clearRect(0, 0, W, H); wctx.drawImage(img, 0, 0, W, H);
-      wctx.globalCompositeOperation = 'destination-in'; wctx.drawImage(rimSmall, 0, 0, W, H);
-      ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(wet, 0, 0, W, H); ctx.globalAlpha = 1;
-    };
-    const setup = () => {
-      const W = Math.min(img.naturalWidth, Math.round(art.clientWidth * Math.min(devicePixelRatio || 1, 2)) || img.naturalWidth);
-      cv.width = wet.width = W; cv.height = wet.height = Math.round(W * img.naturalHeight / img.naturalWidth);
-      ready = true; drawn = -1; paint();
-    };
-    img.complete && img.naturalWidth ? setup() : img.addEventListener('load', setup, { once: true });
-    if (document.documentElement.classList.contains('no-webgl')) want = 1;
-    return v => { want = v; paint(); };
-  })();
-  const band = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
-  const onFrame = (inLoc, p, x, y) => {
-    if (!inLoc) { canvas.style.opacity = pins.style.opacity = ''; return; }
-    steps.forEach(el => el.classList.toggle('in', p >= +el.dataset.at));
-    const fade = band(p, 0.5, 0.62), draw = band(p, 0.56, 0.92);
-    canvas.style.opacity = pins.style.opacity = lead.style.opacity = (1 - fade).toFixed(3);
-    art.style.opacity = fade.toFixed(3);   // its paper-filled houses would otherwise blank out patches of the map
-    const ease = t => t * t * (3 - 2 * t);
-    art.style.setProperty('--sketch', ease(band(draw, 0, 0.3)).toFixed(3));
-    inkTo(band(draw, 0.14, 0.88));
-    art.style.setProperty('--colour', ease(band(draw, 0.7, 1)).toFixed(3));
-    art.classList.toggle('alive', draw >= 1);
-    const box = list.getBoundingClientRect(), f = first.getBoundingClientRect(), pin = lead.ownerSVGElement.getBoundingClientRect();
-    const x0 = box.right + 24 - pin.left, y0 = f.top + f.height / 2 - pin.top, x1 = x - pin.left, y1 = y - pin.top;
-    lead.setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)}H${Math.max(x0, x1 - 70).toFixed(1)}L${x1.toFixed(1)} ${y1.toFixed(1)}`);
-    lead.style.strokeDashoffset = (1 - band(p, 0.2, 0.34)).toFixed(3);
-  };
-  island({ canvas: document.querySelector('.island'), hero: document.getElementById('top'),
-    loc: document.getElementById('locations'), labels: document.querySelector('.pins'), onFrame })
-    .catch(e => { console.error(e); document.documentElement.classList.add('no-webgl'); });
-</script>
+<script src="assets/main.js?v=mwj94k9e"></script>
+<script src="assets/sun.js?v=mwj94k9e"></script>
 </body>
 </html>
