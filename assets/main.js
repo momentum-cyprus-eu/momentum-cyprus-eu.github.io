@@ -131,9 +131,11 @@
         .to(intro.querySelector('.intro-mid'), { opacity: 0, y: -24, duration: 0.45, ease: 'power2.in' }, 1.45)
         .fromTo(arch, { left: vw / 2, top: vh / 2 + smallH / 2, width: 0, height: 0 },
           { left: vw / 2 - smallW / 2, top: vh / 2 - smallH / 2, width: smallW, height: smallH, duration: 0.7, ease: 'expo.out' }, 1.6)
-        .fromTo(arch.querySelector('img'), { scale: 1.4 }, { scale: 1.15, duration: 0.7, ease: 'expo.out' }, 1.6)
+        .fromTo(arch.querySelectorAll('img'), { scale: 1.4 }, { scale: 1.15, duration: 0.7, ease: 'expo.out' }, 1.6)
         .to(arch, { left: 0, top: 0, width: vw, height: vh, borderRadius: '0px 0px 0px 0px', duration: 0.75, ease: 'expo.inOut' }, 2.1)
-        .to(arch.querySelector('img'), { scale: 1, duration: 0.75, ease: 'expo.inOut' }, 2.1)
+        .to(arch.querySelectorAll('img'), { scale: 1, duration: 0.75, ease: 'expo.inOut' }, 2.1)
+        /* Itay opens the window; as it lands in the hero the picture dissolves into Paphos, the hero's own photograph */
+        .fromTo(arch.querySelector('.ia-paphos'), { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'power2.inOut' }, 2.9)
         .set(intro, { backgroundColor: 'transparent' }, 2.85)
         .to(arch, { left: () => target().left, top: () => target().top, width: () => target().width, height: () => target().height,
           borderRadius: '9999px 9999px 30px 30px', duration: 0.95, ease: 'expo.inOut' }, 2.85);

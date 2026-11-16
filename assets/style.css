@@ -372,3 +372,6 @@ html:not(.no-intro) body{overflow:hidden}
   .hero-down{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.intro-arch .ia-itay{object-position:50% 22%;background:#fff}
+.intro-arch .ia-paphos{opacity:0}
