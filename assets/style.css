@@ -7,7 +7,9 @@
 }
 *,*:before,*:after{box-sizing:border-box}
 html{background:var(--black);color:var(--text);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-body{margin:0;background:var(--white);overflow-x:clip}
+html,body{overflow-x:clip} /* nothing (a zoomed card, a wide row) may ever widen the page sideways on a phone */
+body{margin:0;background:var(--white)}
+#service{overflow-x:clip}
 img{max-width:100%;display:block}
 h1,h2,h3,h4,p,ul,ol,figure,blockquote{margin:0}
 ul,ol{padding:0;list-style:none}
@@ -402,6 +404,7 @@ h2 em,h1 em{font-style:italic;font-weight:400}
 /* the sunrise film before Why Cyprus: the frame stays while the scroll plays the sun up out of the sea */
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .sunfilm{position:relative;height:260vh;background:var(--white)}
+@media (max-width:760px){.sunfilm{height:170vh}} /* a shorter run on phones, so the sunrise plays faster under the thumb */
 .sunfilm-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
   -webkit-mask-image:linear-gradient(transparent,#000 14%,#000 84%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 84%,transparent)}
 .sun-frames,.sun-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}

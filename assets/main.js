@@ -295,7 +295,7 @@
     const ecards = $$('.ecard');
     if (ecards.length) {
       G.timeline({ scrollTrigger: { trigger: '.edge', start: 'top 92%', end: 'top 30%', scrub: 0.9 } })
-        .fromTo(ecards, { scale: 1.45, opacity: 0, filter: 'blur(16px)', y: 60 }, { scale: 1, opacity: 1, filter: 'blur(0px)', y: 0, ease: 'power3.out', stagger: 0.22 })
+        .fromTo(ecards, { scale: innerWidth < 760 ? 1.15 : 1.45, opacity: 0, filter: 'blur(16px)', y: 60 }, { scale: 1, opacity: 1, filter: 'blur(0px)', y: 0, ease: 'power3.out', stagger: 0.22 })
         .fromTo('.ecard .big', { scale: 1.8, opacity: 0 }, { scale: 1, opacity: 1, ease: 'power2.out', stagger: 0.22 }, 0.15);
       ScrollTrigger.create({ trigger: '.edge', start: 'top 32%', once: true,
         onEnter: () => G.fromTo('.ecard .sheen', { x: '-160%', skewX: -12 }, { x: '360%', skewX: -12, duration: 1.5, ease: 'power2.inOut', stagger: 0.14 }) });
