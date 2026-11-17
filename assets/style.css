@@ -462,8 +462,9 @@ html:not(.no-intro) body{overflow:hidden}
   .pin-sticky{position:static}
   .psteps li{opacity:1;transform:none;min-height:0;padding-top:90px}
   .film{max-width:460px;width:100%;justify-self:center;order:-1}
-  .reels{grid-template-columns:repeat(3,72%);overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad);scrollbar-width:none}
-  .reel{scroll-snap-align:start}
+  .reels{grid-template-columns:repeat(2,1fr);gap:10px}
+  .reel{aspect-ratio:9/14;border-radius:18px}
+  .reel:nth-child(3){display:none}
   .hero-in{padding-top:100px;padding-bottom:64px}
 }
 @media (max-width:560px){
