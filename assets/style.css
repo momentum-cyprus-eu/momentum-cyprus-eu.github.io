@@ -7,7 +7,7 @@
 }
 *,*:before,*:after{box-sizing:border-box}
 html{background:var(--black);color:var(--text);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-html,body{overflow-x:clip} /* nothing (a zoomed card, a wide row) may ever widen the page sideways on a phone */
+html,body{overflow-x:clip;overscroll-behavior-x:none} /* nothing (a zoomed card, a wide row) may ever widen the page sideways on a phone, and a sideways swipe never turns into the browser's back/forward */
 body{margin:0;background:var(--white)}
 #service{overflow-x:clip}
 img{max-width:100%;display:block}
