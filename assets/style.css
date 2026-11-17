@@ -62,6 +62,9 @@ h3{font-weight:700;font-size:20px;line-height:1.25}
 .menu-open .head .on-dark{opacity:1!important}.menu-open .head .on-light{opacity:0!important}
 
 /* hero */
+.hero-bg{position:absolute;inset:0;z-index:-2;overflow:hidden;background:var(--black)}
+.hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);opacity:.95}
+.hero-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,33,49,.8) 0%,rgba(13,33,49,.52) 50%,rgba(13,33,49,.3) 100%),linear-gradient(0deg,rgba(13,33,49,.6),transparent 35%)}
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;color:#fff;background:var(--black);overflow:hidden;isolation:isolate}
 /* split: the words on navy at the left, the photograph in an arch at the right */
 .hero:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 78% 40%,rgba(200,135,90,.16),transparent 70%)}

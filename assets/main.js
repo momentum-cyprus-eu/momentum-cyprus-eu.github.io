@@ -41,6 +41,9 @@
   });
   addEventListener('keydown', e => e.key === 'Escape' && closeMenu());
 
+  /* the hero's background film stays still for visitors who asked for less motion */
+  const bgv = $('.hero-bg video'); if (bgv && reduce) { bgv.removeAttribute('autoplay'); bgv.pause(); }
+
   /* WhatsApp links */
   if (WHATSAPP) $$('.wa-link').forEach(a => { a.href = `https://wa.me/${WHATSAPP}`; a.target = '_blank'; a.rel = 'noopener'; });
 
