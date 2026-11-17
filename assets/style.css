@@ -342,8 +342,6 @@ h2 em,h1 em{font-style:italic;font-weight:400}
 .intro-skip:hover{color:#fff}
 html:not(.no-intro) body{overflow:hidden}
 
-/* the reading progress line under the header */
-.prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--gold);transform-origin:left;transform:scaleX(var(--read,0))}
 
 @media (max-width:1080px){
   .cards4,.edge{grid-template-columns:repeat(2,1fr)}

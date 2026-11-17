@@ -22,13 +22,12 @@
     e.preventDefault(); closeMenu(); go(el);
   });
 
-  /* header: solid once you scroll, with a thin copper reading line; the WhatsApp button appears after the hero */
-  const fab = $('.wa-float'), prog = $('.prog');
+  /* header: solid once you scroll; the WhatsApp button appears after the hero */
+  const fab = $('.wa-float');
   const onScroll = () => {
-    const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    const y = scrollY;
     head.classList.toggle('solid', y > 40);
     fab.classList.toggle('show', y > innerHeight * 0.9);
-    prog.style.setProperty('--read', max > 0 ? (y / max).toFixed(4) : 0);
   };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
