@@ -319,6 +319,15 @@ h2 em,h1 em{font-style:italic;font-weight:400}
 .rev-row:hover .rev-track{animation-play-state:paused}
 @keyframes drift{to{transform:translateX(calc(-50% - 8px))}}
 .reviews .qcard{width:clamp(300px,32vw,430px);flex:none;padding:30px}
+/* four reviews (2026-11-21): a still 2x2 grid; on phones a native swipe row that snaps card by card */
+.reviews.rev-grid{grid-template-columns:1fr 1fr;overflow:visible;-webkit-mask-image:none;mask-image:none}
+.rev-grid .qcard{width:auto}
+@media (max-width:760px){
+  .reviews.rev-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+    margin-inline:calc(var(--pad) * -1);padding:4px var(--pad) 18px;scroll-padding-inline:var(--pad);scrollbar-width:none}
+  .reviews.rev-grid::-webkit-scrollbar{display:none}
+  .rev-grid .qcard{flex:0 0 84%;scroll-snap-align:start;padding:26px}
+}
 .reviews .qcard blockquote{font:400 16.5px/1.6 var(--head);letter-spacing:0;color:var(--text)}
 .avatar{display:grid;place-items:center;font:500 16px/1 var(--head);color:var(--gold)}
 .rating b{font:500 22px/1 var(--head);color:var(--text);margin-right:4px}
