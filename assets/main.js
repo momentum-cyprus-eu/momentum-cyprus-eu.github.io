@@ -191,6 +191,20 @@
 
   /* the video player: any [data-video] opens it; until the files arrive it says so */
   const modal = $('.vmodal'), vid = modal.querySelector('video'), soon = modal.querySelector('.vsoon');
+  /* the surprise: a veiled card first lifts its veil (0.95s), and only then opens the film */
+  $$('.film.veiled').forEach(b => b.addEventListener('click', e => {
+    if (!b.classList.contains('veiled')) return;
+    e.stopImmediatePropagation();
+    b.classList.add('revealing');
+    setTimeout(() => { b.classList.remove('veiled'); b.click(); setTimeout(() => b.classList.remove('revealing'), 1200); }, reduce ? 0 : 950);
+  }));
+  /* the sound comes in softly with the picture */
+  const fadeInSound = () => {
+    if (reduce) return;
+    vid.volume = 0; const t0 = performance.now();
+    const step = now => { const k = Math.min(1, (now - t0) / 1400); vid.volume = k * k; if (k < 1 && !vid.paused) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
   $$('[data-video]').forEach(b => b.addEventListener('click', () => {
     const src = b.dataset.video;
     vid.hidden = !src; soon.hidden = !!src;
@@ -198,7 +212,7 @@
     // vertical films (Itay's main film is 9:16) get a tall, narrow player instead of the 16:9 one
     modal.classList.toggle('portrait', b.dataset.ratio === '9/16');
     modal.showModal(); lenis && lenis.stop();
-    if (src) vid.play().catch(() => {});
+    if (src) vid.play().then(fadeInSound).catch(() => {});
   }));
   const shut = () => { vid.pause(); vid.removeAttribute('src'); vid.load(); modal.close(); };
   modal.querySelector('.vclose').addEventListener('click', shut);
