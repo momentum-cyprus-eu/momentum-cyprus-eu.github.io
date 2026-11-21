@@ -194,7 +194,9 @@
   $$('[data-video]').forEach(b => b.addEventListener('click', () => {
     const src = b.dataset.video;
     vid.hidden = !src; soon.hidden = !!src;
-    if (src) { vid.src = src; if (b.dataset.poster) vid.poster = b.dataset.poster; }
+    if (src) { vid.src = src; if (b.dataset.poster) vid.poster = b.dataset.poster; else vid.removeAttribute('poster'); }
+    // vertical films (Itay's main film is 9:16) get a tall, narrow player instead of the 16:9 one
+    modal.classList.toggle('portrait', b.dataset.ratio === '9/16');
     modal.showModal(); lenis && lenis.stop();
     if (src) vid.play().catch(() => {});
   }));
