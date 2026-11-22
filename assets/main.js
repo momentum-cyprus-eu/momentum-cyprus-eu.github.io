@@ -361,7 +361,8 @@
   if (window.Swiper && document.querySelector('.stories')) new Swiper('.stories', { slidesPerView: 1.08, spaceBetween: 16, grabCursor: true,
     navigation: { prevEl: '.sw-prev', nextEl: '.sw-next' }, breakpoints: { 760: { slidesPerView: 2, spaceBetween: 18 }, 1100: { slidesPerView: 3, spaceBetween: 18 } } });
 
-  /* the form: checks the required fields, then shows the thank-you line (LAUNCH: send to the CRM here) */
+  /* the form: checks the required fields, then opens WhatsApp to Itay with the details filled in (user's choice,
+     2026-11-22). Nothing is sent until the visitor presses send in WhatsApp. LAUNCH: a CRM can be added here too. */
   const form = $('#form');
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -369,7 +370,14 @@
     /* name, phone and country are required; the email is optional but must look like one if given */
     form.querySelectorAll('[required], [type=email]').forEach(f => { const bad = (f.required && !f.value.trim()) || (f.type === 'email' && f.value && !/^\S+@\S+\.\S+$/.test(f.value)); f.classList.toggle('bad', bad); if (bad && ok) { ok = false; f.focus(); } });
     if (!ok) return;
-    form.querySelector('.sent').hidden = false; form.querySelector('button').disabled = true;
+    const v = n => (form.elements[n].value || '').trim();
+    const lines = ['Hi Itay, I’d like to book a consultation.', '', 'Name: ' + v('name'), 'Phone: ' + v('phone'), 'Country: ' + v('country')];
+    if (v('email')) lines.push('Email: ' + v('email'));
+    if (v('looking')) lines.push('Looking for: ' + v('looking'));
+    if (v('budget')) lines.push('Budget: ' + v('budget'));
+    if (v('message')) lines.push('', v('message'));
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
+    form.querySelector('.sent').hidden = false;
   });
   document.fonts.ready.then(() => setTimeout(() => { window.__ready = true; }, 900)); // for tools/snap.js
 })();
