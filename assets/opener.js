@@ -13,7 +13,8 @@
 
   const v = op.querySelector('.op-video'), cv = op.querySelector('.op-burn'), soundBtn = op.querySelector('.op-sound');
   const small = matchMedia('(max-width: 760px)').matches;
-  v.src = small ? 'assets/video/opener-m.mp4' : 'assets/video/opener.mp4';
+  // ?q=2: the full-HD encode (2026-11-23); bump it whenever the film files are replaced, so cached old films aren't reused
+  v.src = (small ? 'assets/video/opener-m.mp4' : 'assets/video/opener.mp4') + '?q=2';
   /* + "make it open straight with sound": try to start with sound; browsers only allow that if the visitor has
      interacted with the site before, so if it is refused the film starts muted and the sound comes on with the
      visitor's first click / tap / key anywhere (a scroll doesn't count as permission in any browser) */
