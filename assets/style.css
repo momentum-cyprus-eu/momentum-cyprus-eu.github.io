@@ -524,3 +524,30 @@ html:not(.no-intro) body{overflow:hidden}
 
 .intro-arch .ia-itay{object-position:50% 22%;background:#fff}
 .intro-arch .ia-paphos{opacity:0}
+
+/* ---- the opening film (assets/opener.js): full screen, burns away like paper on scroll ---- */
+.opener{display:none}
+.opener-on{overflow:hidden}
+.opener-on .opener{display:block;position:fixed;inset:0;z-index:120;background:#000;overflow:hidden}
+.opener-on .intro{display:none}
+.opener.burning{background:transparent}
+.op-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+@media (orientation:portrait){.op-video{object-fit:contain}}
+.op-burn{position:absolute;inset:0;width:100%;height:100%;display:none}
+.opener.gl .op-burn{display:block}
+.opener.gl .op-video{visibility:hidden}
+.op-sound,.op-skip{position:absolute;bottom:max(22px,env(safe-area-inset-bottom));z-index:2;display:inline-flex;align-items:center;gap:8px;
+  padding:10px 16px;border-radius:999px;border:1px solid rgba(251,248,243,.28);background:rgba(13,33,49,.35);color:#FBF8F3;
+  font:500 13px/1 Inter,system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .3s,border-color .3s}
+.op-sound{left:22px}.op-skip{right:22px}
+.op-sound:hover,.op-skip:hover{background:rgba(200,135,90,.35);border-color:rgba(200,135,90,.7)}
+.op-sound svg{width:16px;height:16px;fill:#FBF8F3}
+.op-sound svg .w{fill:none;stroke:#FBF8F3;stroke-width:1.6;stroke-linecap:round;opacity:.35}
+.op-sound.on svg .w{opacity:1}
+.op-hint{position:absolute;left:50%;bottom:max(26px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:2;display:grid;justify-items:center;gap:10px;
+  color:#FBF8F3;font:500 11px/1 Inter,system-ui,sans-serif;letter-spacing:.34em;text-transform:uppercase;opacity:0;transition:opacity 1s}
+.op-hint i{display:block;width:1px;height:34px;background:linear-gradient(#C8875A,transparent);animation:op-hint 1.8s ease-in-out infinite}
+@keyframes op-hint{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.opener.hinting .op-hint{opacity:.45}
+.opener.ended .op-hint{opacity:1}
+.opener.burning .op-sound,.opener.burning .op-skip,.opener.burning .op-hint{opacity:0;pointer-events:none;transition:opacity .3s}

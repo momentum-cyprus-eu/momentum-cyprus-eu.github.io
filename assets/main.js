@@ -278,16 +278,18 @@
       if (!/intro=hold/.test(location.search))
         Promise.race([draw, new Promise(r => setTimeout(r, 900))]).then(() => document.fonts.ready).then(() => tl.play());
     };
-    if (first && !root.classList.contains('no-intro')) playIntro(first);
-    else { first && first.remove(); heroIn(false); }
-    replayIntro = () => {
-      if (playing || !introCopy) return;
-      lenis && lenis.scrollTo(0, { immediate: true }); scrollTo(0, 0);
-      G.set('.hero .up', { opacity: 0 });
-      const el = introCopy.cloneNode(true);
-      document.body.prepend(el); root.classList.remove('no-intro');
-      playIntro(el);
-    };
+    /* + the opening film (opener.js): when it plays, the old opening is not used on entry ("without Itay's
+       animation at the entrance, not needed"); the site comes in under the film's burn, hero words rising */
+    /* + "remove Itay's picture at the entrance when the site loads": the old opening (logo + Itay's arch) never plays
+       on entry any more, with or without the film, and the header logo no longer replays it */
+    first && first.remove(); root.classList.add('no-intro');
+    if (window.__opener) {
+      lenis && lenis.stop();
+      window.__opener.then(() => { scrollTo(0, 0); if (lenis) { lenis.scrollTo(0, { immediate: true, force: true }); lenis.start(); } heroIn(false); });
+    } else heroIn(false);
+    // playIntro / introCopy stay defined but unused, in case the old opening is wanted back
+    void playIntro; void introCopy; void playing;
+    replayIntro = null; // the header logo is a normal link to the top again
 
     /* headings rise line by line from behind a mask */
     document.fonts.ready.then(() => {
